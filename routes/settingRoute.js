@@ -8,6 +8,6 @@ router.delete('/delete', auth, deleteaccount);
 
 router.get('/notifications', auth, notification);
 
-router.patch('/notifications', auth, notificationSettings)
+router.post('/notifications', auth, notificationSettings)
 
 export default router;
