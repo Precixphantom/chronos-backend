@@ -6,7 +6,7 @@ import { equal } from 'assert';
 import { error, timeStamp } from 'console';
 
 // check health 
-const healthCheck = async (req, res) => {
+export const healthCheck = async (req, res) => {
     res.status(200).json({
         status: "OK",
         timeStamp: new Date().toISOString(),
