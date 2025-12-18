@@ -106,7 +106,7 @@ cron.schedule(
 
       const upcoming = await Task.find({
         completed: false,
-        remainderSent: { $ne: true },
+        reminderSent: { $ne: true },
         deadline: {
           $gte: fiveMinMark,
           $lt: oneMinAfter
@@ -133,7 +133,7 @@ cron.schedule(
         }
 
         // Mark as sent to avoid duplicates
-        task.remainderSent = true;
+        task.reminderSent = true;
         await task.save();
       }
     } catch (err) {

@@ -1,28 +1,13 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
 
 dotenv.config();
 
-/* ===========================
-   NODEMAILER TRANSPORTER
-   =========================== */
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
+// RESEND EMAIL SERVICE
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-/* ===========================
-   EMAIL TEMPLATES
-   =========================== */
+// EMAIL TEMPLATES
 export const emailTemplates = {
   /* ---------- WELCOME ---------- */
   welcome: (userName) => ({
@@ -180,13 +165,13 @@ Chrono © ${new Date().getFullYear()}`,
    BASE EMAIL SENDER
    =========================== */
 export const sendEmail = async (to, template) => {
-  if (!transporter) {
-    return { success: false, error: 'Transporter not configured' };
+  if (!resend) {
+    return { success: false, error: 'Resend not configured'}
   }
 
   try {
-    const info = await transporter.sendMail({
-      from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.SMTP_USER}>`,
+    const { data, error } = await resend.emails.send({
+      from: 'Chronos <onboarding@resend.dev>',
       to,
       subject: template.subject,
       html: template.html,
@@ -197,8 +182,12 @@ export const sendEmail = async (to, template) => {
         'List-Unsubscribe': `<${process.env.FRONTEND_URL}/api/settings/notifications>`,
       },
     });
-
-    return { success: true, messageId: info.messageId };
+    if (error) {
+      console.error('Error sending email', error);
+      return { success: false, error: error.message };
+    }
+    
+    return { success: true, messageId: data.id };
   } catch (error) {
     console.error('Error sending email:', error);
     return { success: false, error: error.message };
