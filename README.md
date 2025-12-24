@@ -497,7 +497,6 @@ I'm working through these as I learn more about production best practices.
 
 MIT License - feel free to fork, modify, and learn from this project.
 
-See [LICENSE](LICENSE) file for details.
 
 ---
 
