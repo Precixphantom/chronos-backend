@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node.js-16+-green.svg)](https://nodejs.org)
 
 **Live API:** [https://chronos-backend-bqjf.onrender.com](https://chronos-backend-bqjf.onrender.com)  
-**Frontend:** [chronos-frontend-nine.vercel.app](https://chronos-frontend-nine.vercel.app)
+**Frontend:** https://pchronos.vercel.app/
 
 ---
 
@@ -484,7 +484,6 @@ git push origin feature/your-feature-name
 
 ## 🐛 Known Issues
 
-- Task reminders use server timezone (UTC) instead of user timezone
 - No pagination on GET requests (will be an issue with many tasks)
 - Email templates are plain text (no HTML styling yet)
 - Password requirements are minimal (should enforce stronger passwords)
@@ -515,7 +514,7 @@ This project wouldn't exist without:
 ## 👨‍💻 About Me
 
 **Precious Afolabi**  
-Computer Science & Cybersecurity Student | Junior Backend Developer | Aspiring Ethical Hacker | Building & Learning in Public
+Computer Science & Cybersecurity Student | Backend Developer | Aspiring Ethical Hacker | Building & Learning in Public
 
 Every feature was a learning experience—from understanding RESTful design to debugging timezone issues in production.
 
